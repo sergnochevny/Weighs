@@ -1,0 +1,23 @@
+HKCR
+{
+	Weighs.KeybParams.1 = s 'KeybParams Class'
+	{
+		CLSID = s '{B164B866-B2B3-4FCD-BFF6-A56A091BD464}'
+	}
+	Weighs.KeybParams = s 'KeybParams Class'
+	{
+		CLSID = s '{B164B866-B2B3-4FCD-BFF6-A56A091BD464}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B164B866-B2B3-4FCD-BFF6-A56A091BD464} = s 'KeybParams Class'
+		{
+			ProgID = s 'Weighs.KeybParams.1'
+			VersionIndependentProgID = s 'Weighs.KeybParams'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'both'
+			}
+		}
+	}
+}

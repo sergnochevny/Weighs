@@ -1,0 +1,23 @@
+HKCR
+{
+	Weighs.MassaK.1 = s 'MassaK Class'
+	{
+		CLSID = s '{C979F170-A46C-4DF7-A123-0A50E3CD506F}'
+	}
+	Weighs.MassaK = s 'MassaK Class'
+	{
+		CLSID = s '{C979F170-A46C-4DF7-A123-0A50E3CD506F}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {C979F170-A46C-4DF7-A123-0A50E3CD506F} = s 'MassaK Class'
+		{
+			ProgID = s 'Weighs.MassaK.1'
+			VersionIndependentProgID = s 'Weighs.MassaK'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'both'
+			}
+		}
+	}
+}

@@ -1,0 +1,170 @@
+// Weighs.idl : IDL source for Weighs.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Weighs.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	
+[
+	uuid(56E8B452-B586-44B7-9410-96181D25BECB),
+	version(1.0),
+	helpstring("Weighs OLE ActiveX MACCA-K бо")
+]
+library WEIGHS
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+	
+	[
+		object,
+		uuid(7BBFA81D-9500-42F3-B600-95C3973E0759),
+		dual,
+		helpstring("IKeybParams Interface"),
+		pointer_default(unique)
+	]
+	interface IKeybParams : IDispatch
+	{
+        [id(0xfffffffc), propget, restricted, hidden]
+        HRESULT _NewEnum([out, retval] IUnknown** pRet);
+
+        [id(00000000), propget]
+        HRESULT Item([in] long Id, [out, retval] short* pRet);
+
+        [id(00000000), propput]
+        HRESULT Item([in] long Id, [in] short Value);
+
+        [id(0x00000001), propget]
+        HRESULT Count([out, retval] int* pRet);
+
+        [id(0x0000002)]
+        HRESULT GetData();
+
+        [id(0x0000003)]
+        HRESULT SetData();
+	};
+
+	[
+		uuid(B164B866-B2B3-4FCD-BFF6-A56A091BD464),
+		helpstring("KeybParams Class")
+	]
+	coclass KeybParams
+	{
+		[default] interface IKeybParams;
+	};
+
+	[
+		object,
+		uuid(32BE97D0-FDEC-43F5-8AE1-40379DE148C9),
+		dual,
+		helpstring("IMassaK Interface"),
+		pointer_default(unique)
+	]
+	interface IMassaK : IDispatch
+	{
+		[id(0x00000001)]
+		HRESULT _stdcall CreateCommunication([in] unsigned char PortNo);
+		[id(0x00000002)]
+		HRESULT _stdcall DestroyCommunication();
+		[id(0x00000003)]
+		HRESULT _stdcall SetLabel([in] unsigned char LabelType, 
+								  [in] unsigned char LabelLength, 
+								  [in] unsigned char NDepartWeight, 
+								  [in] unsigned char NDepartPiece, 
+								  [in] unsigned char BarCodeKind, 
+								  [in] unsigned char SancPrnDate, 
+								  [in] unsigned char SancPrnPrice, 
+								  [in] BSTR PrimAdvStr, 
+								  [in] BSTR SecAdvStr);
+		[id(0x00000004)]
+		HRESULT _stdcall GetLabelFormat([out] unsigned char * LabelType, 
+										[out] unsigned char * LabelLength);
+		[id(0x00000005)]
+		HRESULT _stdcall SetLabelParams( [in] unsigned char NDepartWeight, 
+										 [in] unsigned char NDepartPiece, 
+										 [in] unsigned char BarCodeKind, 
+										 [in] unsigned char SancPrnDate, 
+										 [in] unsigned char SancPrnPrice, 
+										 [in] BSTR PrimAdvStr, 
+										 [in] BSTR SecAdvStr);
+		[id(0x00000006)]
+		HRESULT _stdcall GetLabelParams( [out] unsigned char *NDepartWeight, 
+										 [out] unsigned char *NDepartPiece, 
+										 [out] unsigned char *BarCodeKind, 
+										 [out] unsigned char *SancPrnDate, 
+										 [out] unsigned char *SancPrnPrice, 
+										 [out] BSTR * PrimAdvStr, 
+										 [out] BSTR * SecAdvStr);
+		[id(0x00000007)]
+		HRESULT _stdcall SetArticle( [in] short ArticleN,
+									 [in] unsigned char ArticleType, 
+									 [in] unsigned char GroupCode, 
+									 [in] long ArticleCode, 
+									 [in] double Price,
+									 [in] short Tare,
+									 [in] short ShelfLife,
+									 [in] BSTR Name);
+		[id(0x00000009)]
+		HRESULT _stdcall SetArticleD([in] short ArticleN,
+									 [in] unsigned char ArticleType, 
+									 [in] unsigned char GroupCode, 
+									 [in] long ArticleCode, 
+									 [in] double Price,
+									 [in] short Tare,
+									 [in] DATE ShelfLife,
+									 [in] BSTR Name);
+		[id(0x00000010)]
+		HRESULT _stdcall GetArticle( [in] short ArticleN,
+									 [out] unsigned char * ArticleType, 
+									 [out] unsigned char * GroupCode, 
+									 [out] long * ArticleCode, 
+									 [out] double * Price,
+									 [out] short * Tare,
+									 [out] long * ShelfLife,
+									 [out] BSTR * Name);
+		[id(0x00000011)]
+		HRESULT _stdcall SetArticle_AddInf([in] short ArticleN, 
+										   [in] unsigned char StrNo, 
+										   [in] BSTR AddInf);
+		[id(0x00000012)]
+		HRESULT _stdcall CleanArticle_AddInf([in] short ArticleN);
+		[id(0x00000013)]
+		HRESULT _stdcall GetArticle_AddInf([in] short ArticleN, 
+										   [in] unsigned char StrNo,
+										   [out]BSTR * AddInf);
+		[id(0x00000014)]
+		HRESULT _stdcall SetKeybrdParams([in] VARIANT * KeybDat);
+		[id(0x00000015)]
+		HRESULT _stdcall GetKeybrdParams([out] VARIANT * KeybDat);
+		[id(0x00000016)]
+		HRESULT _stdcall GetWeight( [out, retval] double * Value);
+		[id(0x00000017)]
+		HRESULT _stdcall GetTotalWeight([in] short ArticleN,
+										[out, retval] double * Value);
+		[id(0x00000018), propget]
+		HRESULT _stdcall DevN([out, retval] unsigned char * Value );
+		[id(0x00000018), propput]
+		HRESULT _stdcall DevN([in] unsigned char Value );
+		[id(0x00000019), propget, restricted, hidden]
+		HRESULT _stdcall ProtN([out, retval] unsigned char * Value );
+		[id(0x00000019), propput, restricted, hidden]
+		HRESULT _stdcall ProtN([in] unsigned char Value );
+		[id(0x00000020), propget]
+		HRESULT _stdcall LastError([out, retval] BSTR * Value );
+		[propget, id(0x00000021)] 
+		HRESULT KeybParams([out, retval] IKeybParams ** pVal);
+
+	};
+
+
+	[
+		uuid(C979F170-A46C-4DF7-A123-0A50E3CD506F),
+		helpstring("MassaK Class")
+	]
+	coclass MassaK
+	{
+		[default] interface IMassaK;
+	};
+	
+};
